@@ -1,5 +1,7 @@
 plugins {
     id("java")
+    id("se.patrikerdes.use-latest-versions") version "0.2.18"
+    id("com.github.ben-manes.versions") version "0.48.0"
 }
 
 group = "org.example"
@@ -10,18 +12,12 @@ repositories {
 }
 
 dependencies {
-    testImplementation("org.junit.jupiter:junit-jupiter-api:5.9.2")
-    testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.9.2")
+    testImplementation("org.junit.jupiter:junit-jupiter-api:5.10.0")
+    testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.10.0")
+    implementation("org.apache.commons:commons-lang3:3.13.0")
 }
 
 tasks.getByName<Test>("test") {
     useJUnitPlatform()
 }
 
-tasks.withType<Jar> {
-    manifest {
-        attributes["Main-Class"] = "com.gradle.tutorial.FizzBuzzProcessor"
-    }
-
-    from(configurations.runtimeClasspath.get().map { it.isDirectory() ?: zipTree(it) })
-}
